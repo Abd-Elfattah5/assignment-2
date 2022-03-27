@@ -1,7 +1,14 @@
+# initializing the libiraies 
+
+
 import numpy as np
 import pygame
 import sys
 import math
+
+
+#initializing colours 
+
 
 colour1 = (170,0,255)
 colour2 = (0,0,0)
@@ -11,6 +18,8 @@ turn = 0
 
 colum = 7
 raw = 6
+
+#board showing function to display the board 
 
 def graphic(board):
     for c in range(colum):
@@ -27,6 +36,9 @@ def graphic(board):
                pygame.draw.circle(screen,colour4,(int(c*win_size+win_size/2),high - int(r*win_size+win_size/2)),radius)
     pygame.display.update()
 
+    
+    
+# a function to check if the raw and colomns are empty or not 
 def is_empty(board,colum,raw) :
     global Player_raw
     Player_raw = 0
@@ -35,8 +47,15 @@ def is_empty(board,colum,raw) :
            Player_raw = i
            return True
     return False
+
+
+# i faced a problem when coding this game is that the board is getting filled from up to down so i had to do a function to flip the board 
+
 def flip_board(board):
     print(np.flip(board, 0))
+
+    
+   # and this is a function to check the case of winning  
 
 def is_Win(board ,Player_raw, Player_col, sign):
     global Player_score
@@ -138,6 +157,8 @@ def is_Win(board ,Player_raw, Player_col, sign):
         if Player_score == 4:
             return True
 
+        
+   # and now initializing the imprtant values for the pygame functions to work
 Sign1=1
 Sign2=2
 
@@ -159,6 +180,9 @@ graphic(board)
 pygame.display.update()
 playing = 0
 mmfont = pygame.font.SysFont("arial", 75)
+
+# and this while loop for running the whole game using the functions i made 
+
 
 while playing == 0 :
         for event in pygame.event.get():
@@ -212,6 +236,9 @@ while playing == 0 :
                         pygame.display.update()
                         playing = 2
                     flip_board(board)
+
+                    
+ # this function right here to hold the game from shutting down for a few seconds to allow the player to see if he won or not 
 
 if playing != 0 :
     pygame.time.wait(2000)
